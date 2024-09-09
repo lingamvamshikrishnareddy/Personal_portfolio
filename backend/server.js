@@ -1,17 +1,17 @@
-
 require('dotenv').config(); // Load environment variables
-
 const express = require('express');
 const cors = require('cors');
 const apiRoutes = require('./routes/api'); // Import your routes
 const { connectDB } = require('./config/database'); // Import the DB connection function
-
+const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (if any) from the React app or a build directory
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Connect to MongoDB
 connectDB();
@@ -19,7 +19,10 @@ connectDB();
 // Routes
 app.use('/api', apiRoutes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Catch-all route to serve the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+// Export the app (no app.listen)
+module.exports = app;
