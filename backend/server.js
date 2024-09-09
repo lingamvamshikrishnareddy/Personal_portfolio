@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const apiRoutes = require('./routes/api'); // Import your routes
-const { connectDB } = require('./config/database'); // Import the DB connection function
+const apiRoutes = require('./routes/api'); // Adjust the path if necessary
+const { connectDB } = require('./config/database');
 const path = require('path');
 const app = express();
 
@@ -9,19 +9,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
-
 // Connect to MongoDB
 connectDB();
 
-// Routes
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+// API routes
 app.use('/api', apiRoutes);
 
-// Catch-all route to serve the React app
+// Serve the frontend application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
 });
 
-// Export the app
 module.exports = app;
