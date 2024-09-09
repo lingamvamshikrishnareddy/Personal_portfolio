@@ -1,15 +1,16 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "server.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/api/(.*)", "dest": "/server.js" }
-    ],
-    "env": {
-      "MONGODB_URI": "mongodb+srv://lingamvamshikrishnareddy:<I380FMIwjyG8Gy9p>@cluster0.jgpsvpt.mongodb.net/portfolio_db?retryWrites=true&w=majority",
-      "JWT_SECRET": "your_jwt_secret_here",
-      "NODE_ENV": "development"
-    }
+  "version": 2,
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" },
+    { "src": "frontend/package.json", "use": "@vercel/static-build" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/server.js" },
+    { "src": "/(.*)", "dest": "/frontend/build/$1" }
+  ],
+  "env": {
+    "MONGODB_URI": "your_mongodb_uri",
+    "JWT_SECRET": "your_jwt_secret_here",
+    "NODE_ENV": "development"
   }
-  
+}
