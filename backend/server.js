@@ -1,4 +1,3 @@
-require('dotenv').config(); // Load environment variables
 const express = require('express');
 const cors = require('cors');
 const apiRoutes = require('./routes/api'); // Import your routes
@@ -10,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files (if any) from the React app or a build directory
+// Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Connect to MongoDB
@@ -24,5 +23,5 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// Export the app (no app.listen)
+// Export the app
 module.exports = app;
