@@ -1,8 +1,11 @@
-
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const connectDB = async () => {
   try {
+    if (!process.env.MONGODB_URI) {
+      throw new Error('MONGODB_URI is not defined in the environment variables');
+    }
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -14,7 +17,6 @@ const connectDB = async () => {
   }
 };
 
-// Optionally, you can add this to handle the mongoose deprecation warning
 mongoose.set('strictQuery', false);
 
 module.exports = { connectDB };
