@@ -1,8 +1,7 @@
 const handleSubmit = async (e) => {
-  e.preventDefault(); // Prevent page reload on form submit
-
+  e.preventDefault();
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/contact`, { // Update here
+    const response = await fetch('/api/contact', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
