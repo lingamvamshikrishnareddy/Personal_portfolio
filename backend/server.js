@@ -1,8 +1,10 @@
-mongoose.set('strictQuery', true);
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+
+// Now we can use mongoose
+mongoose.set('strictQuery', true);
 
 const app = express();
 
