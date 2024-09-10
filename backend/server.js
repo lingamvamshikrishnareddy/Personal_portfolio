@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const apiRoutes = require('./routes/api');
 
 const app = express();
 
@@ -24,8 +23,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB connected successfully'))
 .catch((err) => console.error('MongoDB connection error:', err));
 
-// Routes
-app.use('/api', apiRoutes);
+// Import routes
+let apiRoutes;
+try {
+  apiRoutes = require('./routes/api');
+  app.use('/api', apiRoutes);
+} catch (error) {
+  console.error('Error importing API routes:', error);
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
