@@ -19,7 +19,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/contact', {  // Updated API endpoint
+      const response = await fetch('https://personal-portfolio-wx8g.onrender.com/api/contact', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
