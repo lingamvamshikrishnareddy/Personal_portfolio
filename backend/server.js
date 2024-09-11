@@ -10,7 +10,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || '*',
+  origin: process.env.FRONTEND_URL || 'https://personal-portfolio-frontend-olzz.onrender.com',
   optionsSuccessStatus: 200
 };
 
