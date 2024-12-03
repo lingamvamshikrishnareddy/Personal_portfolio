@@ -1,0 +1,49 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-apple-background text-gray-800;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+@layer components {
+  /* Apple-like glassmorphism effect */
+  .glassmorphism {
+    @apply bg-white/80 backdrop-blur-lg border border-gray-100/50 shadow-apple-light;
+  }
+
+  /* Subtle hover effect */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-apple-medium;
+  }
+}
+
+/* Optional: Font face for SF Pro Display if you have the font */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/path/to/your/font/SFProDisplay-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Optional: Responsive typography */
+@responsive {
+  .text-fluid-sm { font-size: clamp(0.75rem, 2vw, 1rem); }
+  .text-fluid-base { font-size: clamp(1rem, 3vw, 1.25rem); }
+  .text-fluid-lg { font-size: clamp(1.5rem, 4vw, 2rem); }
+}
